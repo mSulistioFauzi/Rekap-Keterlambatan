@@ -20,8 +20,8 @@
             <label for="name" class="col-sm-2 col-form-label">Nama Siswa :</label>
             <div class="col-sm-10">
                 <select class="form-select" name="name" id="name" required>
-                    <option value="" disabled selected>Select Nama Siswa</option>
-                        @foreach($students as $siswa)
+                    @foreach($students as $siswa)
+                    <option value="{{ $siswa->id }}" {{ $siswa->id == $lates->student_id ? 'selected' : '' }}" disabled ></option>
                             <option value="{{ $siswa->id }}">{{ $siswa->name }}</option>
                         @endforeach
                 </select>
@@ -31,7 +31,7 @@
         <div class="mb-3 row">
             <label for="date_time_late" class="col-sm-2 col-form-label">Waktu Keterlambatan :</label>
             <div class="col-sm-10">
-                <input type="datetime-local" class="form-control" id="date_time_late" name="date_time_late" required>
+                <input type="datetime-local" class="form-control" id="date_time_late" name="date_time_late" value="{{ $lates['date_time'] }}" required>
             </div>
         </div>
         <div class="mb-3 row">

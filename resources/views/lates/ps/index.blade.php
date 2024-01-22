@@ -81,8 +81,8 @@
                             <td>{{ optional($group->first()->students)->name }}</td>
                             <td>{{ $total }}</td>
                             <td>
-                                <a href="{{ route('ps.lates.psdetail') }}" class="btn btn-primary me-2">Lihat</a>
-                            </td>
+                                <a href="{{ route('ps.lates.psdetail', $nis) }}" class="btn btn-primary me-2">Lihat</a>
+                            </td>                            
                             @if ($total >= 3)
                             <td>
                                 <a href="{{ route('ps.lates.psdownload', $group->first()['id']) }}" class="btn btn-secondary">Unduh Surat Pernyataan</a>

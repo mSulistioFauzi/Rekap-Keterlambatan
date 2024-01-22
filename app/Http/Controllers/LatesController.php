@@ -147,17 +147,26 @@ class LatesController extends Controller
         
     }
 
-    public function psdetail()
-    {
-        $rayonIds = rayons::where('user_id', Auth::User()->id)->pluck('id');
-        $siswa = students::whereIn('rayon_id', $rayonIds)->get();
-        $lates = Lates::whereIn('student_id', $siswa->pluck('id'))->with('students')->get();
+    // public function psdetail()
+    // {
+    //     $rayonIds = rayons::where('user_id', Auth::User()->id)->pluck('id');
+    //     $siswa = students::whereIn('rayon_id', $rayonIds)->get();
+    //     $lates = Lates::whereIn('student_id', $siswa->pluck('id'))->with('students')->get();
         
-        // Kelompokkan data keterlambatan berdasarkan NIS siswa
-        $groupedLates = $lates->groupBy('student.nis');
+    //     // Kelompokkan data keterlambatan berdasarkan NIS siswa
+    //     $groupedLates = $lates->groupBy('student.nis');
     
-        return view('lates.ps.detail', compact('lates', 'groupedLates', 'siswa'));
-    }
+    //     return view('lates.ps.detail', compact('lates', 'groupedLates', 'siswa'));
+    // }
+    public function psdetail($nis)
+{
+    $rayonIds = rayons::where('user_id', Auth::user()->id)->pluck('id');
+    $student = students::where('nis', $nis)->whereIn('rayon_id', $rayonIds)->first();
+    $lates = Lates::where('student_id', $student->id)->with('students')->get();
+
+    return view('lates.ps.detail', compact('lates', 'student'));
+}
+
 
     public function psdownloadPDF($id)
     {

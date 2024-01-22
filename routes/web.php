@@ -97,7 +97,7 @@ Route::middleware(['IsLogin'])->group(function() {
         Route::prefix('/latesPS')->name('ps.lates.')->group(function () {
             Route::get('/rekap', [LatesController::class, 'rekap'])->name('index');
             Route::get('searchPS', [LatesController::class, 'search1'])->name('search1');
-            Route::get('/psdetail', [LatesController::class, 'psdetail'])->name('psdetail');
+            Route::get('/psdetail/{nis}', [LatesController::class, 'psdetail'])->name('psdetail');
             Route::get('psdownload/{id}', [LatesController::class, 'psdownloadPDF'])->name('psdownload');
             Route::get('psexport-excel', [LatesController::class, 'psexportExcel'])->name('psexport-excel');
         });
